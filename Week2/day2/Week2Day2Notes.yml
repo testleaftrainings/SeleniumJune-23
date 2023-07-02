@@ -1,0 +1,140 @@
+Today's Agenda:
+    - 2:15 - 2:30 -> Live Quiz
+    - 2:30 - 3:00 -> Absolute xpath
+    - 3:00 - 4:00 -> Basic Xpath
+    - 4:00 - 4:30 -> Breakout
+    - 4:30 - 5:45 -> Advanced Xpath
+    - 5:45 - 6:00 -> Breakout
+    - 6:00 - 6:30 -> Implicit wait & Thread.sleep()
+
+
+ Basic locators:
+   id 
+   name
+   classname
+   linkText
+   partialLinkText()   
+
+Xpath:
+  -Absolute Xpath:
+     - starts with '/'
+     - starts from the root tag
+     - It is not much used
+     Ex: /html/body/div[2]/div[2]/div/form/p/input
+
+  -Relative Xpath:
+     - starts with '//'
+  1) Basic Xpath:
+    a)Attribute based Xpath:
+    Syntax:
+      //tagname[@attributename='attributevalue']
+    Example:
+      //input[@id='password']  
+     //input[@id='twotabsearchtextbox']
+
+    b)Text based Xpath:
+    Syntax:
+       //tagname[text()='textvalue']
+    Example:
+        //a[text()='Leads']
+        //button[text()='Create Lead']
+
+    c)Partial Attribute based Xpath:
+    Syntax:
+       //tagname[contains(@attributename,'attributevalue')]  
+    Example:
+       //input[contains(@id,'companyName')] 
+
+    d)Partial Text based xpath:  
+    Syntax:
+       //tagname[contains(text(),'textvalue')]
+    Example:
+       //button[contains(text(),'Lead')]   
+
+    e)Index based Xpath:
+    Syntax:
+        (//tagname[@attributename='attributevalue'])[index]
+    Example:
+         (//input[@class='inputLogin'])[2]
+         (//input[@name='firstName'])[3]       
+
+
+
+  2) Advanced Xpath(Axes based xpath):
+  1. Parent to Child:
+     Syntax:
+      BasicRelativexpathforParent/childTagname
+     Example:
+      //form[@id='login']/p[2]
+
+  2. Child to Parent:
+     Syntax:
+     BasicRelativeXpathforChild/parent::parenttagname
+     Example:
+     //input[@id='password']/parent::p
+     //p[@class='top']/parent::form
+
+  3. GrandParent to GrandChild:
+     Syntax:
+     BasicRelativeXpathforGrandParent//grandChildTagname
+     Example:
+     (//form[@id='login']//input)[3]
+
+  4. GrandChild to GrandParent:
+     Syntax:
+     BasicRelativeXpathforGrandChild/ancestor::GrandParenttagname
+     Example:
+     //input[@class='decorativeSubmit']/ancestor::form   
+
+  5. Elder Cousin to younger Cousin:
+     Syntax:
+     BasicRelativeXpathforElderCousin/following::YoungerCousintagname
+     Example:
+     //span[text()='Company Name']/following::input    
+
+  6. YoungerCousin to ElderCousin:
+     Syntax:
+     BasicRelativeXpathforYoungercousin/preceding::ElderCousintagname
+     Example:
+     //input[@id='createLeadForm_personalTitle']/preceding::span[text()='Salutation']
+
+ 7. ElderSibling to YoungerSibling:
+    Syntax:
+    BasicRelativeXpathforElderSibling/following-sibling::youngerSiblingtagname
+    Example:
+    //label[text()='Username']/following-sibling::input
+
+ 8. YoungerSibling to ElderSibling:
+    Syntax:
+    BasicRelativeXpathforyoungerSibling/preceding-sibling::elderSiblingtagname 
+    Example:
+    //input[@id='password']/preceding-sibling::label
+
+Implicitly Wait:
+  - It is applicable for all findElement() and findElements()
+
+  30 s -locate an element
+  username - 5s
+  password - 2s
+  login    > 30s  -> NoSuchElementException
+  -  
+            
+   
+
+Thread.sleep():
+  - Is applicable only for a single line of code
+  - Thread.sleep(5000);
+  - If it finds an element even in 2000ms -> 3000s is wasted
+
+
+
+
+
+
+
+
+
+
+
+
+

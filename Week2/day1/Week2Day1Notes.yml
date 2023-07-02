@@ -1,0 +1,47 @@
+Today's Agenda:
+   - 2:30 -  3:30 -> Selenium Introduction
+   - 3:30 -  4:00 -> Launch browser
+   - 4:00 -  4:30 -> Breakout
+   - 4:30 -  5:15 -> Basic Locators
+   - 5:15 -  5:30 -> Breakout
+   - 5:30 -  6:15 -> Select Dropdown
+   - 6:15 -  6:30 -> Breakout
+
+   pom:
+      - project object model
+         - All the softwares  required for the project
+
+  Selenium (4.6.0):
+    Selenium manager 
+      - it will download the latest browser version of your system and put it in your local system
+      - it will set up the path
+ Open Dom:
+    - f12 - keyboard
+    - Right click-> Inspect
+    - More tools-> developer tools->     
+
+1.Find the webelement using the locator in the DOM
+2.Do the specific action
+
+
+driver.findElement(By.id("password")).sendKeys("crmsfa");
+
+findElement -> method to locate an element
+By -> Abstract class
+id -> Locator
+"password" -> Locator value
+sendkeys("") -> method to pass values into a text field
+
+Handing Dropdown:
+=================
+   1. Right click and inspect in the dropdown and find whether the element is inside <select>
+   2. If its inside a <select> then use Select class
+   3. First locate the Dropdown element
+   4. Create a object for Select  and pass the DropDown WebElement
+       Select sec = new Select(sourceDD);
+   5. 3 ways to select an option from the dropdown
+       selectByIndex()
+       selectByValue()
+       selectByVisibleText()       
+
+   

@@ -1,0 +1,85 @@
+Today's Agenda:
+    - 2:30 - 3:30  -> Target Locators-Alert
+    - 3:30 - 4:00  -> Breakout
+    - 4:00 - 4:15  -> Sweet ALert
+    - 4:15 - 4:30  -> Break
+    - 4:30 - 5:30  -> Frames
+    - 6:00 - 6:15  -> ChromeOptions
+    - 6:15 - 6:30  -> Snapshot
+
+
+Alert:
+Steps:
+  1. Right click and inspect on it
+  2. If it is not inspectable -> Javascript function
+  3. Selenium webdriver cannot directly interact with an alert
+  4. Instead switch the control to the alert and handle it
+
+TargetLocators is an Interface:
+Alert is an Interface: RemoteALert is the implementation class of the Alert Interface
+ - 4 methods
+ - accept()
+ - dismiss()
+ - getText()
+ - sendKeys(String)
+
+ Exceptions:
+   - NoAlertPresentException
+   - UnhandledAlertException
+
+Types of Alert:
+   1)Modal Alert
+      - Simple Alert:
+          - getText()
+          - accept()
+
+      - Confirm Alert:
+           -getText()
+           - accept()/dismiss()
+
+      - Prompt Alert:
+          - getText()
+          - sendkeys()
+          - accept()/dismiss()
+   2) Non-Modal Alert 
+        - Sweet Alert
+        - It is inspectable
+
+
+   Frames:
+     3 different ways to switch to a frame
+     Note: Selenium example for method Overloading
+       -frame(index)
+       -frame(id)
+       -frame(WebElement)
+
+    defaultContent()
+      - to come out of all frames and switch back to the main window
+
+    parentFrame()
+       - switch to the immediate parent frame
+        frame1
+          click
+        frame2
+           click
+        frame3
+          click
+        frame4
+          click            
+
+
+
+
+
+
+
+
+   Classroom:
+      a)Launch the browser
+      b)Load the url https://www.irctc.co.in/nget/train-search
+      c)Enter MS in ‘From’ textbox
+      d)Enter Cape in ‘To’ textbox
+      e)Click search button 
+      f)Click refresh button
+      g)Click WL and Click BookNow button
+      e)Click No button in the alert

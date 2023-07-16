@@ -1,0 +1,121 @@
+Today's Agenda:
+    - 2:30 - 3:15 -> Window Handling
+    - 3:15 - 3:30 -> Breakout
+    - 3:30 - 3:45 -> Break
+    - 3:45 - 4:00 -> Live Quiz
+    - 4:00 - 5:00 -> Advanced User Interactions
+    - 5:00 - 5:30 -> Breakout
+    - 5:30 - 6:30 -> WebTable
+
+
+   Steps to switch control to a new Window:
+   1. use getWindowHandles() to get the set of window handles
+        Set<String> handles=driver.getWindowHandles();
+   2. To get the size -> handles.size();
+   2. To switch to a particular window using index convert Set into List
+       List<String> list = new ArrayList<String>(handles);
+   3. Use driver.switchTo().window(list.get(index));
+
+  Hints:
+   String pWindowHandle=driver.getWindowHandle()
+   //get all the window handles
+   Set<String> handles = driver.getWindowHandles();
+   // iterate through for each loop
+   for(String eachhandle: handles){
+   // using if condition
+      if(!eachHandle.equals(pWindowHandle)){
+          driver.switchTo().window(eachHandle).close();
+      }
+   }
+   
+
+
+    getWindowHandle()
+      - returns the current window handle
+      - 6A76C2B4132CFAAE47D57AA12A3BF563
+    getWindowHandles()
+       - returns set of window handles
+
+Advanced User Interactions:
+    - mouseHover  - moveToElement()
+    - dragandDrop - 
+    - scrollToElement -
+    - clickandHold -
+    - rightClick  - contextClick()
+    - doubleClick - doubleClick()
+<table>
+   <thead>
+     <tr>
+        <th></th>
+     </tr>
+     <tbody>
+      <tr>
+        <td></td>
+        <td></td>
+         <td></td>
+        <td></td>
+         <td></td>
+        <td></td>
+      </tr>
+      <tr>
+         <td></td>
+        <td></td>
+      </tr>
+     </tbody>
+    </thead>
+</table>      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   
+   
+   https://www.w3schools.com/jsref/tryit.asp?filename=tryjsref_ondblclick  - dc
+   https://jqueryui.com/droppable/                                         - drop
+   https://swisnl.github.io/jQuery-contextMenu/demo.html                    - rc
+   https://www.amazon.in/                                                   - sc
+   https://jqueryui.com/selectable/                                         - selectable
+   
+   
+   
+   
+   
+   
+   
+    
+
+
+
+
+
+
+
+
+     

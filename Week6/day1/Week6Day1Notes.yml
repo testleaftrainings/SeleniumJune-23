@@ -1,0 +1,173 @@
+Today's Agenda:
+    - 2:30 - 3:15 -> Attributes
+    - 3:15 - 3:30 -> Live Quiz
+    - 3:30 - 3:45 -> Break
+    - 3:45 - 4:30 -> Static Parameterization
+    - 4:30 - 4:45 -> Breakout
+    - 4:45 - 5:45 -> DataProvider
+    - 5:45 - 6:00 -> Breakout
+    - 6:00 - 6:45 -> ReadExcel
+
+Attributes:
+1.priority:
+    - Schedule the lower priorities first
+    - Default value of priority is 0
+Syntax:
+    @Test(priority=-1)
+    public void m1(){
+
+    }
+2.enabled:
+    - To ignore a particular testcase from execution
+    - The default value for enabled is true 
+Syntax:
+   @Test(enabled=false)
+    public void m1(){
+        
+    }
+
+3. invocationCount:
+     - The number of times this method should be invoked.
+     - Default value for invocationCount is 1
+     - The Datatype of invocationCount is int
+
+     Syntax:
+         @Test(invocationCount=2)
+         public void m1(){
+
+         }
+
+4. threadPoolSize():    
+      - The size of the thread pool for this method. The method will be invoked from multiple threads
+     as specified by invocationCount. Note: this attribute is ignored if invocationCount is not
+     specified 
+      - Default value for threadPoolSize is 0
+
+      Syntax:
+    @Test(invocationCount=4,threadPoolSize=2)
+    public void m1(){
+
+    }
+
+5. timeOut():
+    - The maximum number of milliseconds this test should take. If it hasn't returned after this
+      time, it will be marked as a FAIL.
+
+      Syntax:
+          @Test(invocationCount=2,timeOut=20000)
+          public void m1(){
+
+          }
+
+6. invocationTimeOut():
+  - The maximum number of milliseconds that the total number of invocations on this test method
+    should take. This annotation will be ignored if the attribute invocationCount is not specified
+    on this method. If it hasn't returned after this time, it will be marked as a FAIL.
+
+    Syntax:
+      @Test(invocationCount=2,invocationTimeOut=40000)
+      public void m1(){
+
+      }
+
+7. dependsOnMethods():
+    - Two types:
+       Hard dependency:
+         - All the methods you depend on must have run and succeeded for you to run. 
+          at least one failure occurred in your dependencies, you will not be invoked and marked as a SKIP in 
+          the report.
+       Soft dependency:
+          - You will always be run after the methods you depend on, even if some of them have failed. 
+          This is useful when you just want to make sure that your test methods are run in a certain order 
+          but their success doesn't really depend on the success of others. A soft dependency is obtained by 
+          adding "alwaysRun=true" in your @Test annotation.
+ Syntax:
+     	@Test(dependsOnMethods = {"week6.day1.CreateLead.createLeadTestcase",
+        "week6.day1.DeleteLead.deleteLeadTestcase"})          
+   
+
+8. alwaysRun:
+     - If set to true, this test method will always be run even if it depends on a method that failed.
+       This attribute will be ignored if this test doesn't depend on any method or group.
+Syntax:
+     	@Test(dependsOnMethods = {"week6.day1.CreateLead.createLeadTestcase",
+        "week6.day1.DeleteLead.deleteLeadTestcase"},alwaysRun = true)          
+
+Paramterization:
+   - Static parameterization
+       
+   - Dynamic parameterization
+
+Steps to do Static parameterization:
+1. Identify the data which is common for all the testcases
+    - url,username,password
+2. Is achieved from the testng.xml
+     -Use parameter tag for each data
+   ex: <parameter name="url" value ="http://leaftaps.com/opentaps/control/main"></parameter>
+3. In the BaseClass On the top of @BeforeMethod() add @Parameters and import from org.testng.annotations
+    ex: @Parameters({"url"}) 
+4. On the method level pass input arguments
+    ex: public void preCondition(String url)  
+5. Finally, replace all the hardcoded datas in the method with the arguments
+   Note: When replacing the hardcoded data remove " "
+   ex: driver.get("http://leaftaps.com/opentaps/control/main")---> driver.get(url) 
+
+Steps to do Dynamic Parameterization:
+1. Identify the datas which is specific to a particular testcase
+   ex:
+     CreateLeadTestcase:
+        - companyname,firstname,lastname
+     EditLeadTestcase:
+        - phno,companyname
+2. Create sendData() inside the specific class/testcase
+3. Create 2-dimensional array to mention the rowCount and columncount
+       String[][] data = new String[3][2];
+
+		//1st set of data
+		data[0][0] = "99";
+		data[0][1] = "TestLeaf";
+
+		//2nd set of data
+		data[1][0] = "91";
+		data[1][1] = "Qeagle";
+
+		//3rd set of data
+		data[2][0] = "90";
+		data[2][1] = "Infosys";
+ 4. return data and change void to String[][]
+ 5. Mark this method with @DataProvider
+ 6. On the @Test() add dataProvider attribute and mention the name of the @DataProvider
+     ex: @Test(dataProvider=sendData) 
+ 7. Pass input arguments to the method level
+    @Test(dataProvider="sendData")
+	public  void editLeadTestcase(String pNo,String cName){
+
+    }
+ 8. Finally, replace all the hardcoded data with the arguments
+
+
+excel: 
+    column1     column2    column3
+ h- companyname firstname lastname
+ r1- TestLeaf    Subraja   S
+ r2-  Qeagle     Vidya     R
+
+ EditLead
+   
+   
+
+@Bs
+  @BT
+    @Bc
+      @DataProvider
+       @BM
+        @Test
+      @AM
+    @AC
+ @AT
+@AS 
+
+
+
+
+

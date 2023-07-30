@@ -1,0 +1,106 @@
+Today's Agenda:
+     - 2:30 - 3:30 -> Excel Integration
+     - 3:30 - 3:45 -> Breakout
+     - 3:45 - 4:00 -> Break
+     - 4:00 - 5:00 -> Common Integration
+     - 5:00 - 5:15 -> Breakout
+     - 5:15 - 5:45 -> Constructor
+     - 5:45 - 6:00 -> static keyword
+     - 6:00 - 6:30 -> Explicit wait
+
+
+Read Excel:
+   Step1: Store data in the excel sheet
+   Step2: REad data from the excel sheet
+   Step3: Pass those datas to the @Test() using @DataProvider 
+
+APache POI:
+
+       ooxml- Office Open Xml standards
+     - To deal with Microsoft applications
+     Extensions:
+        - .xls , .xlsx
+
+     XSSFWorkbook  ----> .xlsx 
+     HSSFWorkBook   
+
+Step1:
+   Create an Excel Sheet
+   Login.xlsx---> 
+   
+   WorkBook
+      Sheets (Sheet1,Sheet2)
+        Rows
+          Columns ---> cell
+
+Steps to create Excel Sheet:
+1. Create data folder under the project
+   Rightclick on the project->New -> Folder -> give name as data -> Finish
+2. Create Excel sheet within data folder
+   RightClick on data folder -> show in system explorer-> Double click data folder
+   -> Create New Excel Worksheet-> Name your worksheet-> Open the worksheet->
+   Store all the datas -> save and close
+
+1. Setup the path of the workbook
+2. Access the sheet using sheet name/index -> wb.getSheetAt(index)
+                                              wb.getSheet(String name)
+3. Enter into a specific row using getRow(index)
+     sheet.getRow(index)
+4. Enter into a specific cell using getCell(index)
+     sheet.getRow(index).getCell(index)
+5. Finally, read data from the cell using getStringCellValue();
+      sheet.getRow(index).getCell(index).getStringCellValue();
+6. Create 2-Dimensional array in the ReadExcel class and pass the rowCount and columnCount
+     String[][] data = new String[rowCount][columnCount];
+7. Assign stringCellValue to data[][]
+     data[i-1][j]=stringCellValue;
+8. return the data
+9. Change the return type to String[][]
+10. Finally, close the workbook
+      wb.close();                
+
+static:
+   - Is to have one common reference/only one copy of the data
+   - If you change the value of a static data the old value will be overriden with the new value
+
+static:
+  - variable
+  - method
+  - block 
+
+
+waits:
+   - ImplicitWait
+        -findElement and findElements()
+        -It is a global wait
+        -It it doesnt find an element -> NoSuchElementException
+
+   - Thread.sleep()
+       - It will sleep for the entire duration specified
+       - It is applicable for a single line of code
+
+Best Approach:
+   Interact as soon as ready
+
+     FluentWait(SuperClass)
+     WebDriverWait(subclass)
+
+  Solution:
+    - Every 500ms(polling interval) the code will go and check if the condition is met or not   
+    - If it is met -> perform the action
+    - If it is not met -> Sleep for another 500ms before poll again
+    - after crossing the maxlimit -> Timeout Exception
+
+ExplicitWait:
+
+ It will wait for the elements behaviour
+   - textTobePresent(ele)
+   - stalenessOf(ele)
+   - invisiblityOf(ele)
+   
+
+
+
+
+
+

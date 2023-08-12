@@ -1,0 +1,118 @@
+Today's Agenda:
+   -2:30 - 3:00 -> sequential execution
+   -3:00 - 3:30 -> Constructor,this
+   -3:30 - 4:15 -> Parallel execution
+   -4:15 - 4:30 -> Breakout
+   -4:30 - 4:45 -> Break
+   -4:45 - 5:45 -> Excel Integration
+   -5:35 - 6:00 -> POM with Cucumber
+   -6:00 - 6:30 -> ThreadLocal Configuration
+
+
+For Sequential Execution:
+      - driver should be static
+
+Steps to do Parallel Execution:
+==============================
+    - Remove static keyword in the BaseClass
+    - Create Parameterized Constructor in each classes
+         public LoginPage(ChromeDriver driver) {
+   
+	      }
+    - Assign local driver value with the global driver value
+        public LoginPage(ChromeDriver driver) {
+          this.driver=driver;
+	     }
+
+    - Note: Pass driver wherever you have Constructor call    
+Excel Integration:
+  - Create data folder and create Login excel sheet and create multiple sheets within the same workbook
+  - Create utils package and have ReadExcel program inside that
+        public static String[][] readExcelData(String excelFileName,String sheetName) throws IOException {
+		XSSFWorkbook wb = new XSSFWorkbook("./data/"+excelFileName+".xlsx");//./data/CreateLead.xlsx
+		XSSFSheet sheet = wb.getSheet(sheetName);
+		int rowCount = sheet.getLastRowNum();
+		System.out.println("The total number of rows: "+rowCount);
+		short columnCount = sheet.getRow(0).getLastCellNum();
+		System.out.println("The total number of columns: "+columnCount);
+		System.out.println("Entire data :----------------------");
+		String[][] data = new String[rowCount][columnCount];
+		for (int i = 1; i <= rowCount; i++) {
+			XSSFRow eachRow = sheet.getRow(i);
+			for (int j = 0; j < columnCount; j++) {
+				String stringCellValue = eachRow.getCell(j).getStringCellValue();
+				System.out.println(stringCellValue);
+				data[i-1][j]=stringCellValue;//0,0 
+			}
+
+		}
+
+		wb.close();
+		return data;
+
+	}
+       
+  - Create sendData() in the BaseClass and Annotate with @DataProvider and call ReadExcel class within the method   
+        @DataProvider
+	public String[][] sendData() throws IOException {
+		return ReadExcel.readExcelData(excelFileName,sheetName);
+
+	}
+  - Declare excelFilename and sheetname globally
+      public String excelFileName,sheetName;
+  - On the testcase use dataProvider attribute and mention the name of the DataProvider
+  - Pass all input arguments required and replace all the hardcoded data with the inputs  
+  - Within each Testacases create a method setValues() and annotate with @BeforeTest
+   and set all the values required for each method
+       @BeforeTest
+	public void setValues() {
+		excelFileName="Login";
+		sheetName="Sheet1";
+
+	}  
+      
+
+Constructor:
+    - It is to initialize the state of an object
+    - It is actually same as that of a method
+    - The Constructor name should be same as that of the ClassName
+    - The Constructor will not have any return type even void
+
+ Could you overload a Constructor?
+      Yes, Which is called as Parameterized Constructor   
+ Is it possible to do Constructor Chaining?
+     - Calling one Constructor from another Constructor  
+     - Yes,using this()
+     - Constructor call should be at the first statement of a Constructor    
+POM with Cucumber:
+    - Create features package and create a feature file under this
+    - pages acts as the StepDefintion
+    - Map all the steps in the feature file with each method in each of the pages
+    - Create Runner class inside testcases package and run 
+
+ In TestNG:
+   - For sequential execution declare driver as static
+   - For both parallel and sequential execution remove static and create Constructor
+
+ In Cucumber:
+    - Sequential execution is possible by having driver as static
+    - Constructor defintion is not supported by Cucumber
+
+Have a common Configuration which supports both TestNG as well as Cucumber:
+
+ThreadLocal Configuration:
+           
+    - It is a  class in Java which helps us to access thread-local variables
+    - These variables have differenet values for different threads
+    - It ensures that each thread maintains its own copy of the variable
+    - If multiple threads are working on simultaneously, there wont be any conflict 
+      because each thread has its own copy of the variable
+
+ Encapsulation:
+    - To access a private variable ypu can use getter and setter method
+ set():
+  - Sets the current thread's copy of this thread-local variableto the specified value 
+ get():
+  - Returns the value in the current thread's copy of thisthread-local variable    
+
+
